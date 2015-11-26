@@ -21,6 +21,7 @@ function heatOff() {
 function codesend(code) {
 	console.log(code);
 	if (current !== code) {
+		current=code;
 		exec(CODESEND + code, function (error) {
 			if (error !== null) {
 				console.error('exec error: ' + error);
