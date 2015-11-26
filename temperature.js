@@ -116,6 +116,7 @@ console.log( ip.address() );
 
 setInterval(heater, 1000);
 
+setInterval(readSensors, 5000)
 
-setInterval(sendSensors, 1000);
+setInterval(sendSensors, 5000);
 
