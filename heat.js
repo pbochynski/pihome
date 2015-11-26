@@ -11,29 +11,28 @@ var CODESEND = 'sudo /home/pi/433Utils/RPi_utils/codesend ';
 
 var current = null;
 function heatOn() {
-  if (current !== ON) {
-    codesend(ON);
-    current = ON;
-  }
+	codesend(ON);
 }
 
 function heatOff() {
-  if (current !== OFF) {
-    codesend(OFF);
-    current = OFF;
-  }
+	codesend(OFF);
 }
 
 function codesend(code) {
-	//exec(CODESEND + code, function (error, stdout, stderr) {
-	//	if (error !== null) {
-	//		console.error('exec error: ' + error);
-	//	}
-	//});
-  console.log(code);
+	console.log(code);
+	if (current !== code) {
+		exec(CODESEND + code, function (error) {
+			if (error !== null) {
+				console.error('exec error: ' + error);
+			}
+		});
+	}
 }
 
-setInterval(function(){current=null}, 600000);
+
+setInterval(function () {
+	current = null
+}, 600000);
 
 exports.on = heatOn;
 exports.off = heatOff;
