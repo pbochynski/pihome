@@ -3,7 +3,8 @@ var RADIATOR = '28-031467bacdff';
 var ROOM = '28-0115621a55ff';
 var heat = require('./heat');
 var request = require('request');
-var host = 'https://api.yaas.io/smart/home/v1';
+//var host = 'https://api.yaas.io/smart/home/v1';
+var host = 'https://api.yaas.io/michalmuskala/smarthome/v1';
 var NodeCache = require('node-cache');
 var myCache = new NodeCache({stdTTL: 3000, checkperiod: 120});
 var config = require('config');
@@ -13,7 +14,6 @@ var ip = require("ip");
 var sensors = {};
 sensors[ROOM] = 22.7;
 sensors[RADIATOR] = 44.3;
-var regulator = {enabled:true, temperature:22.5, deviation:0.1};
 
 function readSensors(){
   ds18b20.sensors(function (err, ids) {
@@ -30,11 +30,6 @@ function readSensors(){
   });
 }
 
-function getDate() {
-  return new Date().toISOString().
-    replace(/T/, ' ').      // replace T with a space
-    replace(/\..+/, '');     // delete the dot and everything after
-}
 
 function readTemp(id) {
   ds18b20.temperature(id, function (err, value) {
@@ -116,7 +111,7 @@ console.log( ip.address() );
 
 setInterval(heater, 1000);
 
-readSensors();
+//readSensors();
 
 setInterval(sendSensors, 5000);
 
